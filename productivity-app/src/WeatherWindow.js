@@ -5,21 +5,30 @@ import './WeatherWindow.css';
 function WeatherWindow() {
     const [weatherData, setWeather] = useState([]);
     const [city, setCity] = useState('');
-    useEffect(() => {
-        const fetchWeather = async () => {
-            console.log("Fetching Data");
-            await fetch(`https://api.openweathermap.org/data/2.5/weather?q={city}&APPID=e58676ae0cce98b4b0bfda3483f04916`)
-                .then(res => res.json())
-                .then(res => {
-                    // console.log(res);
-                    setWeather(res);
-            }).catch(error => console.log(error)
-        );
-    }
-    fetchWeather();
-    },[]);
+    const [typedCity, changeStatus] = useState(false);
+    const fetchWeather = async () => {
+        console.log(`https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=e58676ae0cce98b4b0bfda3483f04916`)
+        await fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&APPID=e58676ae0cce98b4b0bfda3483f04916`)
+        .then(res => res.json())
+        .then(res => {
+            setWeather(res);
+            // console.log(res);
+            // console.log(weatherData);
+        })
+        .catch(error => console.log(error));
+    };
+    useEffect(() => { 
+        console.log(city);
+    });
+
+    const handleSubmit = (e) => {
+        changeStatus(!typedCity);
+        fetchWeather();
+      };
+
     return (
       <div className="weather">
+        {typedCity === true ? (
         <header className="weather-header">
             <h1>{weatherData.name}: {((weatherData.main.temp - 273.15) * 1.8 + 32).toPrecision(3)}°F</h1>
             <div className="frames">
@@ -27,18 +36,18 @@ function WeatherWindow() {
                 <div>Feels Like: {weatherData.main.feels_like}</div>
                 <div>{weatherData.weather[0].description}</div>
             </div> 
-            <form>
-                <label>
-                    <div>Type City: <input name="typedCity" 
-                        value={city}
-                        onChange={e => setCity(e.target.value)}
-                        />
-                    </div>
-                </label>
-            </form>
         </header>
+        ) : (
+            <p>Loading weather data...</p>
+        )}
+        <form onSubmit = {handleSubmit}>
+                Type City:  <input 
+                                onChange = {(e) => setCity(e.target.value)} 
+                                value = {city}>
+                            </input>
+                <button type = 'submit'>Submit</button>
+        </form>
       </div>
     );
   }
-  
   export default WeatherWindow;
