@@ -1,22 +1,20 @@
 import { useState, useEffect } from 'react';
+import './WeatherWindow.css';
 // API Key: e58676ae0cce98b4b0bfda3483f04916
 
 function WeatherWindow() {
-    const [weatherData, setWeather] = useState([]);    
+    const [weatherData, setWeather] = useState([]);
+    const [city, setCity] = useState('');
     useEffect(() => {
         const fetchWeather = async () => {
             console.log("Fetching Data");
-            await fetch('https://api.openweathermap.org/data/2.5/weather?q=London,uk&APPID=e58676ae0cce98b4b0bfda3483f04916')
+            await fetch(`https://api.openweathermap.org/data/2.5/weather?q={city}&APPID=e58676ae0cce98b4b0bfda3483f04916`)
                 .then(res => res.json())
                 .then(res => {
-                    console.log(res);
+                    // console.log(res);
                     setWeather(res);
-                    // console.log(`Current weather is ${res.weather[0].main} with ${res.weather[0].description}`);
-                    // console.log(`Temperature is ${res.main.temp} but feels like ${res.main.feels_like}`);
-            }).catch(error => {
-                console.log("Error in Data");
-                console.log(error);
-        } );
+            }).catch(error => console.log(error)
+        );
     }
     fetchWeather();
     },[]);
@@ -29,6 +27,15 @@ function WeatherWindow() {
                 <div>Feels Like: {weatherData.main.feels_like}</div>
                 <div>{weatherData.weather[0].description}</div>
             </div> 
+            <form>
+                <label>
+                    <div>Type City: <input name="typedCity" 
+                        value={city}
+                        onChange={e => setCity(e.target.value)}
+                        />
+                    </div>
+                </label>
+            </form>
         </header>
       </div>
     );
