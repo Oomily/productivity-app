@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
+import "./App.css";
+import Draggable from "react-draggable";
+import { v4 as uuidv4 } from "uuid";
+var randomColor = require("randomcolor");
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  eventLogger = (e, data) => {
+    console.log('Event: ', e);
+    console.log('Data: ', data);
+  };
+
+  render() {
+    return (
+      <Draggable
+        axis="both"
+        handle=".handle"
+        defaultPosition={{x: 0, y: 0}}
+        position={null}
+        grid={[1, 1]}
+        scale={1}
+        onStart={this.handleStart}
+        onDrag={this.handleDrag}
+        onStop={this.handleStop}>
+        <div>
+          <img className="handle" src="images.jpg"/>
+        </div>
+      </Draggable>
+    );
+  }
 }
 
 export default App;
