@@ -1,0 +1,22 @@
+.todo-item {
+    display:flex;
+    flex-direction: row;
+    color:black;
+    width: 225px;
+   }
+.todo-item-crossed {
+    display:flex;
+    flex-direction: row;
+    color: #888;
+    text-decoration: line-through;
+    width: 225px;
+}
+.todo-list{
+    display:flex;
+    flex-wrap:wrap; 
+    border-radius: 25px;
+    background: lightsteelblue;
+    padding: 10px;
+    width: 250px;
+    height: flex;
+}

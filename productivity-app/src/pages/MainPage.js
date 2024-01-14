@@ -1,12 +1,7 @@
 import Draggable from "react-draggable";
-import { v4 as uuidv4 } from "uuid";
 import ToDoWindow from "../ToDoWindow";
+import "../text-box.css";
 
-const DATA = [
-    { id: "todo-0", name: "Eat", completed: true },
-    { id: "todo-1", name: "Sleep", completed: false },
-    { id: "todo-2", name: "Repeat", completed: false },
-  ];
 function MainPage(){
     return(
         <Draggable
@@ -19,9 +14,12 @@ function MainPage(){
         onStart={Draggable.handleStart}
         onDrag={Draggable.handleDrag}
         onStop={Draggable.handleStop}>
-        
-        <div className="handle">
-            {ToDoWindow(DATA)}
+        <div className="todo-list handle">
+            <div>To-Do List</div>
+            <div className="To-Do wrapper">
+                {ToDoWindow()}
+        </div>
+
         </div>    
         </Draggable>
     )

@@ -1,21 +1,28 @@
-function ToDo(props) {
+import React from 'react';
+import "./text-box.css"
+function TodoItem({ task, deleteTask, toggleCompleted }) {
+    function handleChange() {
+        task = toggleCompleted(task.id);
+    }
+    var temp = "";
+    if (task.completed === true){
+        temp = "todo-item-crossed"
+    }
+    else{
+        temp = "todo-item"
+    }
     return (
-      <li className="todo stack-small">
-        <div className="c-cb">
-          <input id={props.id} type="checkbox" defaultChecked={props.completed} />
-          <label className="todo-label" htmlFor="todo-0">
-            {props.name}
-          </label>
+        <div className={temp}>
+                <input 
+                    type="checkbox"
+                    checked={task.completed}
+                    onChange={handleChange}
+                />
+                <div>{task.text}</div>
+                <button onClick={() => deleteTask(task.id)}>
+                    x
+                </button>
         </div>
-        <div className="btn-group">
-          <button type="button" className="btn">
-            Edit <span className="visually-hidden">{props.name}</span>
-          </button>
-          <button type="button" className="btn btn__danger">
-            Delete <span className="visually-hidden">{props.name}</span>
-          </button>
-        </div>
-      </li>
     );
-  }
-  export default ToDo;
+}
+export default TodoItem;
