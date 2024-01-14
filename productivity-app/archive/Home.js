@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
-import WeatherWindow from './WeatherWindow';
+import WeatherWindow from '../src/WeatherWindow';
 
 function Home(){
     const [ user, setUser ] = useState([]);

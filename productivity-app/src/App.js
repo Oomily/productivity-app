@@ -8,11 +8,7 @@ import {Login} from "./pages/Login.js"
 import {MainPage} from "./pages/MainPage.js"
 
 import {
-  BrowserRouter as Router,
   Route,
-  // Switch,
-  // Link,
-  // Redirect,
   Routes
 } from "react-router-dom";
 
@@ -20,20 +16,16 @@ function App(){
 
   return (
     <div>
-      {/* <nav className="nav-bar">
-          <div><Link to="/">Login</Link></div>
-          <div><Link to="/profile">Profile</MainPage></div>
-        </nav> */}
       <Routes>
         <Route path="/" element={<Login />} />
-        <Route path="/" element={<MainPage />} />
+        <Route path="/MainPage" element={<MainPage />} />
       </Routes>
     </div>
   );
 }
 export default App;
 
-// function App() {
+// function App() { --> ARCHIVE
 //     return (
 //       <Router>
 //         <div>
