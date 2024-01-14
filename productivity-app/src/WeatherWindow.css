@@ -1,0 +1,11 @@
+.weather{
+    margin: 1vh;
+    background-color: antiquewhite;
+}
+.weather-header{
+    font-style:oblique;
+}
+.frames{
+    display: flex;
+    flex-direction: row;
+}
