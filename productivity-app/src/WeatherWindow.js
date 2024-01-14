@@ -13,22 +13,23 @@ function WeatherWindow() {
         .then(res => {
             setWeather(res);
             // console.log(res);
-            // console.log(weatherData);
+            console.log(weatherData);
         })
-        .catch(error => console.log(error));
+        .catch(error => console.log(error))
+        .finally(() => console.log("Successful API request!"));
     };
     useEffect(() => { 
         console.log(city);
     });
 
     const handleSubmit = (e) => {
-        changeStatus(!typedCity);
+        changeStatus(true);
         fetchWeather();
       };
 
     return (
       <div className="weather">
-        {typedCity === true ? (
+        {typedCity === true && weatherData ? (
         <header className="weather-header">
             <h1>{weatherData.name}: {((weatherData.main.temp - 273.15) * 1.8 + 32).toPrecision(3)}°F</h1>
             <div className="frames">
